@@ -49,8 +49,7 @@ public class Client {
     }
 
     // send client message to server
-    private void sendDatagramSocket() throws IOException {
-        DatagramSocket ds = new DatagramSocket();
+    private void sendDatagramSocket(DatagramSocket client) throws IOException {
 
         InetAddress ip = InetAddress.getByName(ADDRESS);
 
@@ -58,7 +57,7 @@ public class Client {
 
         DatagramPacket clientMessage = new DatagramPacket(text.getBytes(), text.length(), ip, PORT);
 
-        ds.send(clientMessage);
+        client.send(clientMessage);
 
         System.out.println("IP address: " + InetAddress.getLocalHost().getHostAddress());
         System.out.println("Port Number: " + PORT);

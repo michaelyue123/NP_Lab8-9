@@ -8,6 +8,7 @@ public class Client {
     private final static String ADDRESS = "netprog1.csit.rmit.edu.au";
     private static final int PORT = 61691; // different to the port client is listening to
     private int listeningPortNumber;
+    private DatagramSocket client = null;
 
     public static void main(String[] args) {
         int listeningPortNumber = Integer.parseInt(args[0]);
@@ -18,16 +19,13 @@ public class Client {
         this.listeningPortNumber = listeningPortNumber;
 
         try {
-            DatagramSocket client = new DatagramSocket(PORT); // create a client datagram socket listening on port 61246
+            client = new DatagramSocket(PORT); // create a client datagram socket listening on port 61246
 
             sendDatagramSocket(); // send message to server
 
             while (true) {
                 try {
                     receiveDatagramSocket(client); // listening for message sent back from the server
-                }
-                catch (BindException e) {
-                    continue;
                 }
                 catch (SocketException e) {
                     client.close();
@@ -58,7 +56,7 @@ public class Client {
     // send client message to server
     private void sendDatagramSocket() throws IOException {
 
-        DatagramSocket ds = new DatagramSocket();
+        client = new DatagramSocket();
 
         InetAddress ip = InetAddress.getByName(ADDRESS);
 
@@ -70,7 +68,7 @@ public class Client {
         System.out.println("Port Number: " + listeningPortNumber);
 
         clientMessage.setData(text.getBytes());
-        ds.send(clientMessage);
-        ds.close();
+        client.send(clientMessage);
+        client.close();
     }
 }

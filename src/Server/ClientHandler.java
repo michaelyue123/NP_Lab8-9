@@ -21,13 +21,15 @@ public class ClientHandler extends Thread {
         String IP = clientMessage.getAddress().toString(); // convert ip address to string
         String Port = String.valueOf(clientMessage.getPort()); // convert port number to string
 
+        String[] arr = IP.split("/");
+
         System.out.println(output); // print out the client message
-        System.out.println("IP Address: " + IP);
+        System.out.println("IP Address: " + arr[1]);
         System.out.println("Port Number: " + Port);
 
         clientInfo = new HashMap<>();
         // store string version of IP and Port into HashMap
-        clientInfo.put("IP", IP);
+        clientInfo.put("IP", arr[1]);
         clientInfo.put("Port", Port);
     }
 

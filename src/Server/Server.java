@@ -15,16 +15,17 @@ public class Server {
     public Server() {
         DatagramSocket server = null;
         try{
+            System.out.println("Server starts! Waiting for new connection...");
             server = new DatagramSocket(PORT); // create a server datagram socket running on port 61246
             server.setSoTimeout(10000);
-            System.out.println("Server starts! Waiting for new connection...");
 
             while(true) {
                 try {
                     receiveDatagramSocket(server); // receive packet sent from client
                 }
                 catch (SocketTimeoutException e) {
-                    System.out.println("This is timeout exception!");
+                    System.out.println("Server is about to shut down in 5s!");
+                    server.close();
                     break;
                 }
             }
@@ -37,7 +38,7 @@ public class Server {
 
             Thread.sleep(5000); // 5s later server will send multicast message
 
-            System.out.println("Server is about to shut down in 5s");
+            System.out.println("Server has shut down!");
 
             for(int i=0; i<clientData.size(); i++) {
                 sendMultiCastMessage(
@@ -45,6 +46,9 @@ public class Server {
                         Integer.parseInt(clientData.get("Port")), server
                 );
             }
+        }
+        catch (SocketException e) {
+            e.getMessage();
         }
         catch (InterruptedException e) {
             e.getMessage();
@@ -58,7 +62,7 @@ public class Server {
     }
 
     private void sendMultiCastMessage(String ip, int port, DatagramSocket server) throws IOException {
-        String text = "Server has shut down.";
+        String text = "Server has shut down!";
         InetAddress newIp = InetAddress.getByName(ip);
         DatagramPacket serverMessage = new DatagramPacket(text.getBytes(), text.length(), newIp, port);
         server.send(serverMessage);

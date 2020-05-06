@@ -5,43 +5,32 @@ import java.net.*;
 
 public class Client {
 
-    private final static String ADDRESS = "netprog1.csit.rmit.edu.au";
-    private static final int PORT = 61691; // different to the port client is listening to
-    private int listeningPortNumber;
+    private final static String ADDRESS = "localhost";
+    private static final int PORT_TO_RECEIVE = 61691; // Port for establishing the connection and receiving info
+    private static final int PORT_TO_SEND = 61246; // Port for send the info
     private DatagramSocket client = null;
 
     public static void main(String[] args) {
-        int listeningPortNumber = Integer.parseInt(args[0]);
-        new Client(listeningPortNumber);
+        new Client();
     }
 
-    public Client(int listeningPortNumber) {
-        this.listeningPortNumber = listeningPortNumber;
+    public Client() {
 
         try {
-            client = new DatagramSocket(PORT); // create a client datagram socket listening on port 61246
-
-            sendDatagramSocket(); // send message to server
+            client = new DatagramSocket(); // create a default client datagram socket
+            sendDatagramSocket(client); // send message to server
 
             while (true) {
-                try {
-                    receiveDatagramSocket(client); // listening for message sent back from the server
-                }
-                catch (SocketException e) {
-                    client.close();
-                    break;
-                }
+                // datagram socket using port for receiving packet
+                client = new DatagramSocket(PORT_TO_RECEIVE);
+                receiveDatagramSocket(client); // listening for message sent back from the server
             }
-        }
-        catch (UnknownHostException e) {
+        } catch (UnknownHostException e) {
+            e.getMessage();
+        } catch (IOException e) {
             e.getMessage();
         }
-        catch (IOException e) {
-            e.getMessage();
-        }
-        catch (Exception e) {
-            e.getMessage();
-        }
+
     }
 
     private void receiveDatagramSocket(DatagramSocket client) throws IOException {
@@ -54,20 +43,17 @@ public class Client {
     }
 
     // send client message to server
-    private void sendDatagramSocket() throws IOException {
-
-        client = new DatagramSocket();
+    private void sendDatagramSocket(DatagramSocket client) throws IOException {
 
         InetAddress ip = InetAddress.getByName(ADDRESS);
 
-        String text = "Client on " + ADDRESS + " is listening to " + listeningPortNumber;
+        String text = "Client on " + ADDRESS + " is listening to " + PORT_TO_SEND;
 
-        DatagramPacket clientMessage = new DatagramPacket(text.getBytes(), text.length(), ip, PORT);
+        DatagramPacket clientMessage = new DatagramPacket(text.getBytes(), text.length(), ip, PORT_TO_RECEIVE);
 
         System.out.println("IP address: " + InetAddress.getLocalHost().getHostAddress());
-        System.out.println("Port Number: " + listeningPortNumber);
+        System.out.println("Port Number: " + PORT_TO_SEND);
 
-        clientMessage.setData(text.getBytes());
         client.send(clientMessage);
         client.close();
     }

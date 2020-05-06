@@ -18,18 +18,18 @@ public class ClientHandler extends Thread {
     public void run() {
 
         String output = new String(clientMessage.getData(), 0, clientMessage.getLength());
-        String IP = clientMessage.getAddress().toString(); // convert ip address to string
-        String Port = String.valueOf(clientMessage.getPort()); // convert port number to string
+        String[] arr = output.split(" ");
 
-        String[] arr = IP.split("/");
+        String IP = clientMessage.getAddress().toString().substring(1);
+        String Port = arr[arr.length-1];
 
-        System.out.println(output); // print out the client message
-        System.out.println("IP Address: " + arr[1]);
+        System.out.println("\n"+ output); // print out the client ip address and port number
+        System.out.println("IP Address: " + IP);
         System.out.println("Port Number: " + Port);
 
         clientInfo = new HashMap<>();
         // store string version of IP and Port into HashMap
-        clientInfo.put("IP", arr[1]);
+        clientInfo.put("IP", IP);
         clientInfo.put("Port", Port);
     }
 

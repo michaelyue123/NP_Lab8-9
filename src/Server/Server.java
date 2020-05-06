@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Server {
 
-    public static final int PORT = 61691;
+    private static final int PORT_TO_RECEIVE = 61691; // Port for establishing the connection and receiving info
     List<ClientHandler> client = new LinkedList<>(); // store clientHandler threads
     HashMap<String, String> clientData = new HashMap<>(); // copy client information from clientHandler to server
 
@@ -16,15 +16,15 @@ public class Server {
         DatagramSocket server = null;
         try{
             System.out.println("Server starts! Waiting for new connection...");
-            server = new DatagramSocket(PORT); // create a server datagram socket running on port 61246
-            server.setSoTimeout(15000);
+            server = new DatagramSocket(PORT_TO_RECEIVE); // create a server datagram socket running on port 61246
+            server.setSoTimeout(10000);
 
             while(true) {
                 try {
                     receiveDatagramSocket(server); // receive packet sent from client
                 }
                 catch (SocketTimeoutException e) {
-                    System.out.println("Server is about to shut down in 5s!");
+                    System.out.println("\nServer is about to shut down in 5s!");
                     server.close();
                     break;
                 }
@@ -40,10 +40,13 @@ public class Server {
 
             System.out.println("Server has shut down!");
 
+            server = new DatagramSocket(); // sending packet does not need to specify the port
+
             for(int i=0; i<clientData.size(); i++) {
                 sendMultiCastMessage(
                         clientData.get("IP"),
-                        Integer.parseInt(clientData.get("Port"))
+                        Integer.parseInt(clientData.get("Port")),
+                        server
                 );
             }
         }
@@ -62,13 +65,12 @@ public class Server {
     }
 
     // send multicast message to all clients
-    private void sendMultiCastMessage(String ip, int port) throws IOException {
-        DatagramSocket ds = new DatagramSocket();
+    private void sendMultiCastMessage(String ip, int port, DatagramSocket server) throws IOException {
         String text = "Server has shut down!";
         InetAddress newIp = InetAddress.getByName(ip);
         DatagramPacket serverMessage = new DatagramPacket(text.getBytes(), text.length(), newIp, port);
-        ds.send(serverMessage);
-        ds.close();
+        server.send(serverMessage);
+        server.close();
     }
 
     // receive datagram packet from client

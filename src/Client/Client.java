@@ -6,7 +6,7 @@ import java.net.*;
 public class Client {
 
     private final static String ADDRESS = "netprog1.csit.rmit.edu.au";
-    private static final int PORT = 61691; // different to the port number
+    private static final int PORT = 61691; // different to the port client is listening to
     private int listeningPortNumber;
 
     public static void main(String[] args) {
@@ -20,7 +20,7 @@ public class Client {
         try {
             DatagramSocket client = new DatagramSocket(PORT); // create a client datagram socket listening on port 61246
 
-            sendDatagramSocket(client); // send message to server
+            sendDatagramSocket(); // send message to server
 
             while (true) {
                 try {
@@ -56,17 +56,21 @@ public class Client {
     }
 
     // send client message to server
-    private void sendDatagramSocket(DatagramSocket client) throws IOException {
+    private void sendDatagramSocket() throws IOException {
+
+        DatagramSocket ds = new DatagramSocket();
 
         InetAddress ip = InetAddress.getByName(ADDRESS);
 
-        String text = "Client on " + ADDRESS + " is listening to " + PORT;
+        String text = "Client on " + ADDRESS + " is listening to " + listeningPortNumber;
 
         DatagramPacket clientMessage = new DatagramPacket(text.getBytes(), text.length(), ip, PORT);
 
-        client.send(clientMessage);
-
         System.out.println("IP address: " + InetAddress.getLocalHost().getHostAddress());
         System.out.println("Port Number: " + listeningPortNumber);
+
+        clientMessage.setData(text.getBytes());
+        ds.send(clientMessage);
+        ds.close();
     }
 }

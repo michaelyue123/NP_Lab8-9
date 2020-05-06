@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Server {
 
-    public static final int PORT = 61246;
+    public static final int PORT = 61691;
     List<ClientHandler> client = new LinkedList<>(); // store clientHandler threads
     HashMap<String, String> clientData = new HashMap<>(); // copy client information from clientHandler to server
 
@@ -43,7 +43,7 @@ public class Server {
             for(int i=0; i<clientData.size(); i++) {
                 sendMultiCastMessage(
                         clientData.get("IP"),
-                        Integer.parseInt(clientData.get("Port")), server
+                        Integer.parseInt(clientData.get("Port"))
                 );
             }
         }
@@ -61,12 +61,14 @@ public class Server {
         }
     }
 
-    private void sendMultiCastMessage(String ip, int port, DatagramSocket server) throws IOException {
+    // send multicast message to all clients
+    private void sendMultiCastMessage(String ip, int port) throws IOException {
+        DatagramSocket ds = new DatagramSocket();
         String text = "Server has shut down!";
         InetAddress newIp = InetAddress.getByName(ip);
         DatagramPacket serverMessage = new DatagramPacket(text.getBytes(), text.length(), newIp, port);
-        server.send(serverMessage);
-        server.close();
+        ds.send(serverMessage);
+        ds.close();
     }
 
     // receive datagram packet from client

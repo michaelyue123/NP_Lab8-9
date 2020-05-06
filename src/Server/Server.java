@@ -17,7 +17,7 @@ public class Server {
         try{
             System.out.println("Server starts! Waiting for new connection...");
             server = new DatagramSocket(PORT); // create a server datagram socket running on port 61246
-            server.setSoTimeout(10000);
+            server.setSoTimeout(15000);
 
             while(true) {
                 try {

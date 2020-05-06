@@ -6,9 +6,16 @@ import java.net.*;
 public class Client {
 
     private final static String ADDRESS = "netprog1.csit.rmit.edu.au";
-    private static final int PORT = 61246;
+    private static final int PORT = 61691; // different to the port number
+    private int listeningPortNumber;
 
-    public Client() {
+    public static void main(String[] args) {
+        int listeningPortNumber = Integer.parseInt(args[0]);
+        new Client(listeningPortNumber);
+    }
+
+    public Client(int listeningPortNumber) {
+        this.listeningPortNumber = listeningPortNumber;
 
         try {
             DatagramSocket client = new DatagramSocket(PORT); // create a client datagram socket listening on port 61246
@@ -60,11 +67,6 @@ public class Client {
         client.send(clientMessage);
 
         System.out.println("IP address: " + InetAddress.getLocalHost().getHostAddress());
-        System.out.println("Port Number: " + PORT);
-    }
-
-
-    public static void main(String[] args) {
-        new Client();
+        System.out.println("Port Number: " + listeningPortNumber);
     }
 }

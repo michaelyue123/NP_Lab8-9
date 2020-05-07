@@ -39,8 +39,8 @@ public class Server {
                 clientData.addAll(client.get(i).getClientInfo());
             }
 
-            while(Thread.currentThread().isAlive() && countDown > 0) {
-
+            // apply count down in last 5 seconds
+            while(countDown > 0) {
                 threadMessage(" " + countDown);
                 countDown--;
                 Thread.currentThread().join(1000);

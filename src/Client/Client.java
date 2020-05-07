@@ -20,15 +20,9 @@ public class Client {
             sendDatagramSocket(client); // send message to server
 
             while (true) {
-                try {
-                    // datagram socket using port for receiving packet
-                    client = new DatagramSocket(PORT_TO_RECEIVE);
-                    receiveDatagramSocket(client); // listening for message sent back from the server
-                    break;
-                }
-                catch (BindException e) {
-                    continue;
-                }
+                // datagram socket using port for receiving packet
+                client = new DatagramSocket(PORT_TO_SEND);
+                receiveDatagramSocket(client); // listening for message sent back from the server
             }
         }
         catch (UnknownHostException e) {

@@ -59,7 +59,7 @@ public class Server {
     }
 
     // send multicast message to all clients
-    private void sendMultiCastMessage(String ip, int port) throws IOException {
+    private void sendMultiCastMessage(String ip, Integer port) throws IOException {
         DatagramSocket ds = new DatagramSocket();
         InetAddress newIp = InetAddress.getByName(ip);
         String text = "Server has shut down!";

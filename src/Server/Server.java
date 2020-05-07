@@ -1,4 +1,4 @@
-package Server;
+//package Server;
 
 import java.io.IOException;
 import java.net.*;
@@ -40,18 +40,12 @@ public class Server {
 
             System.out.println("Server has shut down!");
 
-            server = new DatagramSocket(); // sending packet does not need to specify the port
-
             for(int i=0; i<clientData.size(); i++) {
                 sendMultiCastMessage(
                         clientData.get("IP"),
-                        Integer.valueOf(clientData.get("Port")),
-                        server
+                        Integer.valueOf(clientData.get("Port"))
                 );
             }
-        }
-        catch (SocketException e) {
-            e.getMessage();
         }
         catch (InterruptedException e) {
             e.getMessage();
@@ -65,13 +59,14 @@ public class Server {
     }
 
     // send multicast message to all clients
-    private void sendMultiCastMessage(String ip, int port, DatagramSocket server) throws IOException {
-        String text = "Server has shut down!";
+    private void sendMultiCastMessage(String ip, int port) throws IOException {
+        DatagramSocket ds = new DatagramSocket();
         InetAddress newIp = InetAddress.getByName(ip);
+        String text = "Server has shut down!";
 
         DatagramPacket serverMessage = new DatagramPacket(text.getBytes(), text.length(), newIp, port);
-        server.send(serverMessage);
-        server.close();
+        ds.send(serverMessage);
+        ds.close();
     }
 
     // receive datagram packet from client

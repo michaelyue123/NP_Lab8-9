@@ -1,4 +1,4 @@
-package Client;
+//package Client;
 
 import java.io.IOException;
 import java.net.*;
@@ -24,14 +24,12 @@ public class Client {
                     // datagram socket using port for receiving packet
                     client = new DatagramSocket(PORT_TO_RECEIVE);
                     receiveDatagramSocket(client); // listening for message sent back from the server
+                    break;
                 }
                 catch (BindException e) {
                     continue;
                 }
             }
-        }
-        catch (SocketException e) {
-            e.getMessage();
         }
         catch (UnknownHostException e) {
             e.getMessage();

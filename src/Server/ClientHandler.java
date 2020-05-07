@@ -1,17 +1,35 @@
 //package Server;
 
 import java.net.DatagramPacket;
-import java.util.HashMap;
+import java.util.ArrayList;
 
 
 public class ClientHandler extends Thread {
 
     private DatagramPacket clientMessage;
-    HashMap<String, String> clientInfo;  // create HashMap to store client info
+    ArrayList<Client> clientInfo;  // create HashMap to store client info
 
 
     public ClientHandler(DatagramPacket clientMessage) {
         this.clientMessage = clientMessage;
+    }
+
+    class Client {
+        private String ip;
+        private String port;
+
+        public Client(String ip, String port) {
+            this.ip = ip;
+            this.port = port;
+        }
+
+        public String getIp() {
+            return ip;
+        }
+
+        public String getPort() {
+            return port;
+        }
     }
 
     @Override
@@ -20,21 +38,19 @@ public class ClientHandler extends Thread {
         String output = new String(clientMessage.getData(), 0, clientMessage.getLength());
         String[] arr = output.split(" ");
 
-        String IP = arr[2];
-        String Port = arr[arr.length-1];
+        Client client = new Client(arr[2], arr[arr.length-1]);
 
         System.out.println("\n"+ output); // print out the client ip address and port number
-        System.out.println("IP Address: " + IP);
-        System.out.println("Port Number: " + Port);
+        System.out.println("IP Address: " + client.getIp());
+        System.out.println("Port Number: " + client.getPort());
 
-        clientInfo = new HashMap<>();
-        // store string version of IP and Port into HashMap
-        clientInfo.put("IP", IP);
-        clientInfo.put("Port", Port);
+        clientInfo = new ArrayList<>();
+        // store client into arraylist
+        clientInfo.add(client);
     }
 
     // get client information
-    public HashMap<String, String> getClientInfo() {
+    public ArrayList<Client> getClientInfo() {
         return clientInfo;
     }
 }

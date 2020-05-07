@@ -2,7 +2,7 @@
 
 import java.io.IOException;
 import java.net.*;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,7 +10,7 @@ public class Server {
 
     private static final int PORT_TO_RECEIVE = 61691; // Port for establishing the connection and receiving info
     List<ClientHandler> client = new LinkedList<>(); // store clientHandler threads
-    HashMap<String, String> clientData = new HashMap<>(); // copy client information from clientHandler to server
+    ArrayList<ClientHandler.Client> clientData = new ArrayList<>(); // copy client information from clientHandler to server
     private DatagramSocket server = null;
 
     public Server() {
@@ -33,7 +33,7 @@ public class Server {
             for(int i=0; i<client.size(); i++) {
                 client.get(i).join(); // avoid race condition among different clientHandler threads
                 // copy info in clientHandler to server
-                clientData.putAll(client.get(i).getClientInfo());
+                clientData.addAll(client.get(i).getClientInfo());
             }
 
             Thread.sleep(5000); // 5s later server will send multicast message
@@ -42,8 +42,8 @@ public class Server {
 
             for(int i=0; i<clientData.size(); i++) {
                 sendMultiCastMessage(
-                        clientData.get("IP"),
-                        Integer.valueOf(clientData.get("Port"))
+                        clientData.get(i).getIp(),
+                        Integer.valueOf(clientData.get(i).getPort())
                 );
             }
         }

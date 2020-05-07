@@ -42,7 +42,7 @@ public class Server {
 
             for(int i=0; i<clientData.size(); i++) {
                 sendMultiCastMessage(
-                        clientData.get("Host"),
+                        clientData.get("IP"),
                         Integer.valueOf(clientData.get("Port"))
                 );
             }

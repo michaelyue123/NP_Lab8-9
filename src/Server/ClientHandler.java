@@ -1,4 +1,4 @@
-//package Server;
+package Server;
 
 import java.net.DatagramPacket;
 import java.util.HashMap;
@@ -20,7 +20,7 @@ public class ClientHandler extends Thread {
         String output = new String(clientMessage.getData(), 0, clientMessage.getLength());
         String[] arr = output.split(" ");
 
-        String IP = clientMessage.getAddress().toString().substring(1);
+        String IP = arr[2];
         String Port = arr[arr.length-1];
 
         System.out.println("\n"+ output); // print out the client ip address and port number

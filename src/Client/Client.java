@@ -1,4 +1,4 @@
-//package Client;
+package Client;
 
 import java.io.IOException;
 import java.net.*;
@@ -15,19 +15,28 @@ public class Client {
     }
 
     public Client() {
-
         try {
             client = new DatagramSocket(); // create a default client datagram socket
             sendDatagramSocket(client); // send message to server
 
             while (true) {
-                // datagram socket using port for receiving packet
-                client = new DatagramSocket(PORT_TO_RECEIVE);
-                receiveDatagramSocket(client); // listening for message sent back from the server
+                try {
+                    // datagram socket using port for receiving packet
+                    client = new DatagramSocket(PORT_TO_RECEIVE);
+                    receiveDatagramSocket(client); // listening for message sent back from the server
+                }
+                catch (BindException e) {
+                    continue;
+                }
             }
-        } catch (UnknownHostException e) {
+        }
+        catch (SocketException e) {
             e.getMessage();
-        } catch (IOException e) {
+        }
+        catch (UnknownHostException e) {
+            e.getMessage();
+        }
+        catch (IOException e) {
             e.getMessage();
         }
 
@@ -40,6 +49,8 @@ public class Client {
 
         String output = new String(serverMessage.getData(), 0, serverMessage.getLength());
         System.out.println(output); // once client receives the message, client closes its socket connection
+        client.close();
+        System.exit(0);
     }
 
     // send client message to server
@@ -47,7 +58,9 @@ public class Client {
 
         InetAddress ip = InetAddress.getByName(ADDRESS);
 
-        String text = "Client on " + ADDRESS + " is listening to " + PORT_TO_SEND;
+        String ipAddress = InetAddress.getLocalHost().getHostAddress();
+
+        String text = "Client on " + ipAddress + " is listening to " + PORT_TO_SEND;
 
         DatagramPacket clientMessage = new DatagramPacket(text.getBytes(), text.length(), ip, PORT_TO_RECEIVE);
 

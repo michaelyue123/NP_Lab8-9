@@ -34,6 +34,40 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
   </component>
+  <component name="RunManager" selected="Application.Client">
+    <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Client.Client" />
+      <module name="Lab8~9" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Server.Server" />
+      <module name="Lab8~9" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Client" />
+        <item itemvalue="Application.Server" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -44,7 +78,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1588729982290</updated>
-      <workItem from="1588729983615" duration="32609000" />
+      <workItem from="1588729983615" duration="39298000" />
     </task>
     <servers />
   </component>
@@ -56,5 +90,48 @@
       <screen x="-766" y="-1417" width="3440" height="1314" />
     </state>
     <state x="1353" y="-1007" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/-766.-1417.3440.1314/0.23.1680.1027@-766.-1417.3440.1314" timestamp="1588745045035" />
+    <state width="2081" height="375" key="GridCell.Tab.0.bottom" timestamp="1588815748944">
+      <screen x="-766" y="-1417" width="3440" height="1314" />
+    </state>
+    <state width="2081" height="375" key="GridCell.Tab.0.bottom/-766.-1417.3440.1314/0.23.1680.1027@-766.-1417.3440.1314" timestamp="1588815748944" />
+    <state width="2081" height="375" key="GridCell.Tab.0.center" timestamp="1588815748944">
+      <screen x="-766" y="-1417" width="3440" height="1314" />
+    </state>
+    <state width="2081" height="375" key="GridCell.Tab.0.center/-766.-1417.3440.1314/0.23.1680.1027@-766.-1417.3440.1314" timestamp="1588815748944" />
+    <state width="2081" height="375" key="GridCell.Tab.0.left" timestamp="1588815748944">
+      <screen x="-766" y="-1417" width="3440" height="1314" />
+    </state>
+    <state width="2081" height="375" key="GridCell.Tab.0.left/-766.-1417.3440.1314/0.23.1680.1027@-766.-1417.3440.1314" timestamp="1588815748944" />
+    <state width="2081" height="375" key="GridCell.Tab.0.right" timestamp="1588815748944">
+      <screen x="-766" y="-1417" width="3440" height="1314" />
+    </state>
+    <state width="2081" height="375" key="GridCell.Tab.0.right/-766.-1417.3440.1314/0.23.1680.1027@-766.-1417.3440.1314" timestamp="1588815748944" />
+    <state width="2081" height="375" key="GridCell.Tab.1.bottom" timestamp="1588815748945">
+      <screen x="-766" y="-1417" width="3440" height="1314" />
+    </state>
+    <state width="2081" height="375" key="GridCell.Tab.1.bottom/-766.-1417.3440.1314/0.23.1680.1027@-766.-1417.3440.1314" timestamp="1588815748945" />
+    <state width="2081" height="375" key="GridCell.Tab.1.center" timestamp="1588815748945">
+      <screen x="-766" y="-1417" width="3440" height="1314" />
+    </state>
+    <state width="2081" height="375" key="GridCell.Tab.1.center/-766.-1417.3440.1314/0.23.1680.1027@-766.-1417.3440.1314" timestamp="1588815748945" />
+    <state width="2081" height="375" key="GridCell.Tab.1.left" timestamp="1588815748945">
+      <screen x="-766" y="-1417" width="3440" height="1314" />
+    </state>
+    <state width="2081" height="375" key="GridCell.Tab.1.left/-766.-1417.3440.1314/0.23.1680.1027@-766.-1417.3440.1314" timestamp="1588815748945" />
+    <state width="2081" height="375" key="GridCell.Tab.1.right" timestamp="1588815748945">
+      <screen x="-766" y="-1417" width="3440" height="1314" />
+    </state>
+    <state width="2081" height="375" key="GridCell.Tab.1.right/-766.-1417.3440.1314/0.23.1680.1027@-766.-1417.3440.1314" timestamp="1588815748945" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Client/Client.java</url>
+          <line>49</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

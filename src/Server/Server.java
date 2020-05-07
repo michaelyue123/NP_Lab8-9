@@ -1,4 +1,4 @@
-//package Server;
+package Server;
 
 import java.io.IOException;
 import java.net.*;
@@ -11,9 +11,9 @@ public class Server {
     private static final int PORT_TO_RECEIVE = 61691; // Port for establishing the connection and receiving info
     List<ClientHandler> client = new LinkedList<>(); // store clientHandler threads
     HashMap<String, String> clientData = new HashMap<>(); // copy client information from clientHandler to server
+    private DatagramSocket server = null;
 
     public Server() {
-        DatagramSocket server = null;
         try{
             System.out.println("Server starts! Waiting for new connection...");
             server = new DatagramSocket(PORT_TO_RECEIVE); // create a server datagram socket running on port 61246
@@ -45,7 +45,7 @@ public class Server {
             for(int i=0; i<clientData.size(); i++) {
                 sendMultiCastMessage(
                         clientData.get("IP"),
-                        Integer.parseInt(clientData.get("Port")),
+                        Integer.valueOf(clientData.get("Port")),
                         server
                 );
             }
@@ -68,6 +68,7 @@ public class Server {
     private void sendMultiCastMessage(String ip, int port, DatagramSocket server) throws IOException {
         String text = "Server has shut down!";
         InetAddress newIp = InetAddress.getByName(ip);
+
         DatagramPacket serverMessage = new DatagramPacket(text.getBytes(), text.length(), newIp, port);
         server.send(serverMessage);
         server.close();

@@ -42,7 +42,7 @@ public class Server {
 
             for(int i=0; i<clientData.size(); i++) {
                 sendMultiCastMessage(
-                        clientData.get("IP"),
+                        clientData.get("Host"),
                         Integer.valueOf(clientData.get("Port"))
                 );
             }
@@ -59,9 +59,9 @@ public class Server {
     }
 
     // send multicast message to all clients
-    private void sendMultiCastMessage(String ip, Integer port) throws IOException {
+    private void sendMultiCastMessage(String host, Integer port) throws IOException {
         DatagramSocket ds = new DatagramSocket();
-        InetAddress newIp = InetAddress.getByName(ip);
+        InetAddress newIp = InetAddress.getByName(host);
         String text = "Server has shut down!";
 
         DatagramPacket serverMessage = new DatagramPacket(text.getBytes(), text.length(), newIp, port);

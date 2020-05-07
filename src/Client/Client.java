@@ -5,7 +5,7 @@ import java.net.*;
 
 public class Client {
 
-    private final static String ADDRESS = "localhost";
+    private final static String ADDRESS = "netprog1.csit.rmit.edu.au";
     private static final int PORT_TO_RECEIVE = 61691; // Port for establishing the first connection
     private static final int PORT_TO_SEND = 61246; // Port for sending and receiving the info
     private DatagramSocket client = null;
@@ -20,9 +20,14 @@ public class Client {
             sendDatagramSocket(client); // send message to server
 
             while (true) {
-                // datagram socket using port for receiving packet
-                client = new DatagramSocket(PORT_TO_SEND);
-                receiveDatagramSocket(client); // listening for message sent back from the server
+                try{
+                    // datagram socket using port for receiving packet
+                    client = new DatagramSocket(PORT_TO_SEND);
+                    receiveDatagramSocket(client); // listening for message sent back from the server
+                }
+                catch (BindException e) {
+                    continue;
+                }
             }
         }
         catch (UnknownHostException e) {
@@ -56,7 +61,7 @@ public class Client {
 
         DatagramPacket clientMessage = new DatagramPacket(text.getBytes(), text.length(), ip, PORT_TO_RECEIVE);
 
-        System.out.println("IP address: " + InetAddress.getLocalHost().getHostAddress());
+        System.out.println("IP address: " + ipAddress);
         System.out.println("Port Number: " + PORT_TO_SEND);
 
         client.send(clientMessage);

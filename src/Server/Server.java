@@ -12,8 +12,11 @@ public class Server {
     List<ClientHandler> client = new LinkedList<>(); // store clientHandler threads
     ArrayList<ClientHandler.Client> clientData = new ArrayList<>(); // copy client information from clientHandler to server
     private DatagramSocket server = null;
+    private static final int COUNT_DOWN_TIME = 5;
 
     public Server() {
+        int countDown = COUNT_DOWN_TIME;
+
         try{
             System.out.println("Server starts! Waiting for new connection...");
             server = new DatagramSocket(PORT_TO_RECEIVE); // create a server datagram socket running on port 61246
@@ -36,7 +39,12 @@ public class Server {
                 clientData.addAll(client.get(i).getClientInfo());
             }
 
-            Thread.sleep(5000); // 5s later server will send multicast message
+            while(Thread.currentThread().isAlive() && countDown > 0) {
+
+                threadMessage(" " + countDown);
+                countDown--;
+                Thread.currentThread().join(1000);
+            }
 
             System.out.println("Server has shut down!");
 
@@ -56,6 +64,11 @@ public class Server {
         finally {
             if(server != null) server.close();
         }
+    }
+
+    static void threadMessage(String message) {
+        String threadName = Thread.currentThread().getName();
+        System.out.format("%s: %s%n", threadName, message);
     }
 
     // send multicast message to all clients

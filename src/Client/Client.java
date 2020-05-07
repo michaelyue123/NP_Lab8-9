@@ -6,8 +6,8 @@ import java.net.*;
 public class Client {
 
     private final static String ADDRESS = "localhost";
-    private static final int PORT_TO_RECEIVE = 61691; // Port for establishing the connection and receiving info
-    private static final int PORT_TO_SEND = 61246; // Port for send the info
+    private static final int PORT_TO_RECEIVE = 61691; // Port for establishing the first connection
+    private static final int PORT_TO_SEND = 61246; // Port for sending and receiving the info
     private DatagramSocket client = null;
 
     public static void main(String[] args) {

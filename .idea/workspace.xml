@@ -4,8 +4,6 @@
     <list default="true" id="5336dabf-76d4-4375-a2f5-58d249ae629d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/Server.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +76,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1588729982290</updated>
-      <workItem from="1588729983615" duration="44594000" />
+      <workItem from="1588729983615" duration="45124000" />
     </task>
     <servers />
   </component>
@@ -122,16 +120,5 @@
       <screen x="-766" y="-1417" width="3440" height="1314" />
     </state>
     <state width="2081" height="375" key="GridCell.Tab.1.right/-766.-1417.3440.1314/0.23.1680.1027@-766.-1417.3440.1314" timestamp="1588815748945" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Client/Client.java</url>
-          <line>41</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
